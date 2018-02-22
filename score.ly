@@ -51,15 +51,73 @@ rhMark = \markup {
 
 upper-prelude = \relative c {
   \clef bass
-  g4
+  g4\glissando
   \clef treble
   b'''4
-  c1
+  <c c,>1~ q8 c16\(-. c-. b-. c8-. g16 r g8-. g16-. g-. f-. e-. c~ c1\)
+  r8 g16\(-. g-. a-. c8-. g16-. r g-. g-. a-. c-. d-. e-. c-.\)
 }
 
-lower-prelude = \relative c {
+lower-prelude = \relative c' {
   r2
-  c1
+  << {
+    <c e>8. <g c e>16~ q8 <g b d>~ q2
+    <a c>8. <a c f>16~ q8 <g c e>~ q2
+    <c e>8. <g c e>16~ q8 <g b d>~ q2
+    <a c>8. <a c f>16~ q8 <g c e>
+  } \\ {
+    c,1 c c c2
+  } >>
+  \acciaccatura g'16 g,4 g''8\glissando g,,
+}
+
+upper-one = \relative c'' {
+  \makeOctaves 1 {
+    e2\( d d8.( e16) r8 f-. e4 d
+    c8.( d16) r8 e-. d4 a8 c c8.( b16) r c8-. d16~ d2\)
+  }
+  << {
+    \stemNeutral
+    <e e'>2\( <g g'> <a c a'>8.(-> <b f' b>16)-> r8 <c e c'>8~ q4 <c, c'>
+    <f f'>8.( <e e'>16) r <d d'>8-. <c c'>16~ q4 <b b'>
+    \stemUp
+    <c c'>2\)
+  } \\ {
+    s1*3 c8.( <c, e g>16) r <g d' f>8-. <g c e>16-.
+  } >>
+
+  r16 e'\( fis gis b e, fis gis a8\)
+
+  << {
+    \stemNeutral
+    g'8\( c16 d8 f16~ f8 e c g~ \stemUp g2\) s2
+    \stemNeutral
+    s8 g\( c16 d8 f16~ f8 e c g'~ \stemUp g2\)
+  } \\ {
+    s8 s2.
+    r16 d,16\( b d r d b d \stemNeutral a a r g r b g a g8\)
+    s8 s2.
+    \stemDown
+    r16 d'\( e c e d e f \stemNeutral g4\glissando g,4\)
+  } >>
+}
+
+lower-one = \relative c, {
+  c8. g'16 g4--
+  c,8. g'16 g4--
+  c,8. g'16 g4--
+  c,8. g'16 gis4--
+  a-- e-- fis-- d--
+  g-- d-- b-- g--
+  c8. c16 g'4--
+  e8. e16 c4--
+  <f f'>8.(-> <gis gis'>16)-> r8 <a a'>8~-> q8. e16 a,4
+  d8. a'16 a4-- g-- g,--
+  <f' a'>8.( <e g'>16) r16 <d f'>8-. <c e'>16-. r4 <b gis' b>4
+  <a a'>8. a16~ a8 a8 a'-. a,-. r16 a8.--
+  g8. g16~ g8 g8 g'16 g,8. <d' d'>4--
+  \acciaccatura g,16 f8. f16 f'8-. f,-. r16 f8. <c' c'>4--
+  e,8. c'16~ c8 e, r4 e'16 c <g g'>8--
 }
 
 upper = \relative c' {
@@ -69,6 +127,7 @@ upper = \relative c' {
   \key c \major
   \partial 2
   \upper-prelude
+  \upper-one
   \bar "|."
 }
 
@@ -78,11 +137,12 @@ lower = \relative c' {
   \key c \major
   \partial 2
   \lower-prelude
+  \lower-one
   \bar "|."
 }
 
 dynamics = {
-  s1\f
+  s1\mf
 }
 
 \book {
