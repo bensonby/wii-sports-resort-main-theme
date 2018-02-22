@@ -95,10 +95,10 @@ upper-one = \relative c'' {
     s8 g\( c16 d8 f16~ f8 e c g'~ \stemUp g2\)
   } \\ {
     s8 s2.
-    r16 d,16\( b d r d b d \stemNeutral a a r g r b g a g8\)
+    r16 d,16\( b d r d-3 b-1 d-3 \stemNeutral a-1 a-2 r g-1 r b g a g8\)
     s8 s2.
     \stemDown
-    r16 d'\( e c e d e f \stemNeutral g4\glissando g,4\)
+    r16 d'\( e c e d e f-4 \stemNeutral g4-1\glissando g,4\)
   } >>
 }
 
@@ -120,6 +120,55 @@ lower-one = \relative c, {
   e,8. c'16~ c8 e, r4 e'16 c <g g'>8--
 }
 
+upper-two = \relative c'' {
+  \makeOctaves 1 {
+    d8.\( e16~ e8 f~ f e4 f8 g8. c16~ c8 g~ g c,4.\)
+  }
+  << {
+    f4.-> g8~-> g4. gis8~-> gis4. ais8~-> ais4. b8->~\(
+    b4. \stemNeutral gis16 e b8 e gis b ais4. fis16 cis ais2\)
+  } \\ {
+    <f aes des>8 <ees g ees'> <des f des'> <g bes ees>~
+    q <des f des'> <ees g ees'> <gis b e>~
+    q <dis fis dis'> <e gis e'> <ais cis fis>~
+    q <e gis e'> <fis ais fis'> <b e gis>~
+    q4.
+  } >>
+  a'4.\( fis16 d a8 d fis a
+  <gis eis gis,>4 <ais fisis ais,> <b gis b,> <cis ais cis,>\)
+  <b gis e>4.\( gis16 e b8 e gis b c4 \grace { c16 d e } <f f,>2 c4\)
+  << {
+    \stemNeutral
+    <fis, dis fis,>8\( e16 fis <gis b, gis>8 fis16 gis
+    <a e a,>8 gis16 a <b e, b>8 a16 b
+    <c ees, c>8 bes16 c <d aes d,>8 c16 d
+    <ees ges, ees>8 d16 ees <f c f,>8 ees16 f
+    \stemUp
+    <g d c g>2\)
+  } \\ {
+    s1*2 r4 g,,4 \stemNeutral c g'
+  } >>
+}
+
+lower-two = \relative c, {
+  d8. a'16 a4--
+  d,8. a'16 a4--
+  e8. c'16 c4--
+  e,8. c'16 c4--
+  <des des,>8-> f aes <ees ees,>->~ q4 q8 <e e,>8->~
+  q4 q8 <fis fis,>8->~ q4 q8 <a a,>8->
+
+  a,,8. a'16~ a8 a a4 a'8 a,
+  <gis gis'>8. gis16~ gis8 gis gis8. gis16 gis,4
+  g'8. g16~ g8 g g4 g'8 g,
+  <dis cis'>4 <eis dis'> <fis e'> <gis fis'>
+  a8. e'16 e8. e,16 a8. e'16 e4
+  g,8. d'16 d8. d,16 g8. d'16 d4
+  <e, b' e>4 <d d'> <cis cis'> <c c'>
+  <bes ees bes'> <ees ees'> <aes, aes'> <des aes' des>
+  <c c'>8. c16 g'4 c,8. c16 g'8 g
+}
+
 upper = \relative c' {
   \clef treble
   \tempo 4 = 124
@@ -128,6 +177,7 @@ upper = \relative c' {
   \partial 2
   \upper-prelude
   \upper-one
+  \upper-two
   \bar "|."
 }
 
@@ -138,6 +188,7 @@ lower = \relative c' {
   \partial 2
   \lower-prelude
   \lower-one
+  \lower-two
   \bar "|."
 }
 
