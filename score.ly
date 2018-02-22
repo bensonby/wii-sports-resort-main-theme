@@ -1,6 +1,13 @@
 \version "2.18.2"
 \include "articulate.ly"
-#(set-global-staff-size 15)
+#(set-global-staff-size 16)
+
+% TODO
+% fix note collision
+% add and refine articulations
+% add url to music.bensonby.me
+% add original composer?
+% add repeat
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  http://lsr.di.unimi.it/LSR/Item?id=445
@@ -146,7 +153,7 @@ upper-two = \relative c'' {
     \stemUp
     <g d c g>2\)
   } \\ {
-    s1*2 r4 g,,4 \stemNeutral c g'
+    s1*2 r4 g,,4^\mp \stemNeutral c g'
   } >>
 }
 
@@ -169,6 +176,89 @@ lower-two = \relative c, {
   <c c'>8. c16 g'4 c,8. c16 g'8 g
 }
 
+upper-three = \relative c'' {
+  r8
+  << {
+    f8\( g16 a8. g8-. f-. e-. d-.\)
+  } \\ {
+    <a c>8-. r q-. r16 q16-. r8 q8-. q-.
+  } >>
+  r8
+  << {
+    d8\( e16 f8. e8-. d-. c-. b-.\)
+  } \\ {
+    <f b>8-. r q-. r16 <e gis>-. r8 q-. q-.
+  } >>
+  e'4 a, <f bes d> <e c' e>
+  f'8-. c16( f~ f8 g) bes8-. a-. <f bes>-.
+  << {
+    c8--~ c4
+    s2 s8
+    \clef treble
+    \stemNeutral
+    <c c'>8\(~^\f
+    q8 <c c'>16 <bes bes'>~ q <aes aes'>8 <bes bes'>16~
+    q8. <ees, ees'>16 <bes' bes'>8 <ees ees'>
+    <ees ees'>8. <des des'>16~ q16 <ces ces'>8 <des des'>16~
+    q8. <ges, ges'>16 <des' des'>8 <ges ges'>
+    \stemUp
+    <f f'>1\)
+  } \\ {
+    s8 r8 \clef bass
+    \stemNeutral
+    c,,8-. f16( a8) bes16~( bes8 a) f-. \cl c-.
+    s1*2
+    \cr \stemDown r8 <f' c'>8~^\p q16 q8 q16~ q q8. q8 q
+  } >>
+  <f b>8 q~ q16 q8 q16
+  r4 r8
+  << {
+    \stemNeutral
+    d''16\( e f8. e16~ e8 d c4 \grace { c16 d e f } \stemUp g4\)
+  } \\ {
+    s8 s2. r8 d,16\( e
+    \stemNeutral
+    f8. e16~ e8 d c4 g'\)
+  } >>
+}
+
+lower-three = \relative c {
+  a8( a') e,( e') d,( d') a( a')
+  b,( b') f,( f') e,( e') b( b')
+  a,( <a' c>) c,16( <a' c>8.) bes,,8 bes' c, c'
+  bes8. f16~ f f, f'8 bes,16 f'8. f,8 f
+  bes8. f'16~ f f, f'8 bes,16 f'8. f8 f
+  aes8 aes' aes16 ees aes,8 g8. f'16 g ees g,8
+  ces8 <ges' ces ees>~ q8. ces,16 bes8 <ges' bes des> <des des'> <bes bes'>
+  <g g'>8. d'16 d g8. g16 g'8 g,16 d8 d
+  g8. d16 d d8 g16
+  r4 g,,4->
+  r2 r4 \repeat tremolo 2 { g16\p\< g' }
+  \repeat tremolo 8 { g,16 g'\! }
+}
+
+upper-end = \relative c'' {
+  << {
+    \grace { e32 f g a b }
+    \stemUp
+    <c, e c'>4
+  } \\ {
+    <c, e g>8. q16-.
+  } >>
+  r8 <d b g>8--~ q2
+  <c f a>8. q16-. r8 <c e g>8--~ q4 e16( d c8)
+  <c e g>8. q16-. r8 <d b g>8--~ q2
+  <a' c f>8.-> q16~-> q8 <b d g>8-> r4 <g g'>
+}
+
+lower-end = \relative c, {
+  c4-- r r r8 r16 c
+  c4-- r r2
+  c4-- r r r8 r16 c
+  a''8.-> a16~-> a8 g->
+  g,,8. d'16 g4
+}
+
 upper = \relative c' {
   \clef treble
   \tempo 4 = 124
@@ -178,6 +268,8 @@ upper = \relative c' {
   \upper-prelude
   \upper-one
   \upper-two
+  \upper-three
+  \upper-end
   \bar "|."
 }
 
@@ -189,11 +281,20 @@ lower = \relative c' {
   \lower-prelude
   \lower-one
   \lower-two
+  \lower-three
+  \lower-end
   \bar "|."
 }
 
 dynamics = {
-  s1\mf
+  s2\mf s1*4
+  s1\mp s1*4 s2\< s2\! s1 s2 s16 s8.\mp s4
+  s1*4
+  s1\mf s1 s1\f s1
+  s8. s16\mp s2. s1 s1 s2.\< s4\!
+  s1*2
+  s1_"cresc." s1 s1\f
+  s1\mf s1*7 s2. s4\f s1*2 s4 s2.\mf s1*3
 }
 
 \book {
