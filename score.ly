@@ -3,11 +3,8 @@
 #(set-global-staff-size 16)
 
 % TODO
-% fix note collision
-% add and refine articulations
-% add url to music.bensonby.me
-% add original composer?
-% add repeat
+% fingering up
+% create midi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  http://lsr.di.unimi.it/LSR/Item?id=445
@@ -54,6 +51,9 @@ rhMark = \markup {
   title = "Wii Sports Resort - Main Theme"
   subtitle = "For Piano Solo"
   arranger = "Arranged by Benson"
+  composer = "Composed by Ryo Nagamatsu"
+  copyright = "https://music.bensonby.me"
+  tagline = "https://music.bensonby.me"
 }
 
 upper-prelude = \relative c {
@@ -61,16 +61,16 @@ upper-prelude = \relative c {
   g4\glissando
   \clef treble
   b'''4
-  <c c,>1~ q8 c16\(-. c-. b-. c8-. g16 r g8-. g16-. g-. f-. e-. c~ c1\)
-  r8 g16\(-. g-. a-. c8-. g16-. r g-. g-. a-. c-. d-. e-. c-.\)
+  <c c,>1~ q8 c16\(-.-3 c-.-2 b-.-1 c8-. g16-. r g8-.-2 g16-.-1 g-.-4 f-. e-. c~ c1\)
+  r8 g16\(-.-2 g-.-1 a-. c8-. g16-. r g-.-2 g-.-1 a-. c-. d-. e-. c-.\)
 }
 
 lower-prelude = \relative c' {
   r2
   << {
-    <c e>8. <g c e>16~ q8 <g b d>~ q2
+    <c \parenthesize e>8. <g c e>16~ q8 <g b d>~ q2
     <a c>8. <a c f>16~ q8 <g c e>~ q2
-    <c e>8. <g c e>16~ q8 <g b d>~ q2
+    <c \parenthesize e>8. <g c e>16~ q8 <g b d>~ q2
     <a c>8. <a c f>16~ q8 <g c e>
   } \\ {
     c,1 c c c2
@@ -78,14 +78,19 @@ lower-prelude = \relative c' {
   \acciaccatura g'16 g,4 g''8\glissando g,,
 }
 
+% bar 5 - 16
 upper-one = \relative c'' {
   \makeOctaves 1 {
-    e2\( d d8.( e16) r8 f-. e4 d
-    c8.( d16) r8 e-. d4 a8 c c8.( b16) r c8-. d16~ d2\)
+    e2\( d d8.( e16) r8 f-. e4-- d--
+    c8.( d16) r8 e-. d4-- a8-. c-. c8.( b16) r c8-. d16~-- d2\)
   }
   << {
     \stemNeutral
-    <e e'>2\( <g g'> <a c a'>8.(-> <b f' b>16)-> r8 <c e c'>8~ q4 <c, c'>
+    <e e'>2\( <g g'>
+    \override Script.padding = #2
+    <a c a'>8.(-> <b f' b>16)-> r8 <c e c'>8~->\)
+    \override Script.padding = #0.2
+    q4 <c, c'>\(
     <f f'>8.( <e e'>16) r <d d'>8-. <c c'>16~ q4 <b b'>
     \stemUp
     <c c'>2\)
@@ -109,8 +114,9 @@ upper-one = \relative c'' {
   } >>
 }
 
+% bar 5 - 16
 lower-one = \relative c, {
-  c8. g'16 g4--
+  c8. g'16-1 g4---2
   c,8. g'16 g4--
   c,8. g'16 g4--
   c,8. g'16 gis4--
@@ -120,19 +126,20 @@ lower-one = \relative c, {
   e8. e16 c4--
   <f f'>8.(-> <gis gis'>16)-> r8 <a a'>8~-> q8. e16 a,4
   d8. a'16 a4-- g-- g,--
-  <f' a'>8.( <e g'>16) r16 <d f'>8-. <c e'>16-. r4 <b gis' b>4
+  <f' a'>8.( <e g'>16) r16 <d f'>8-. <c e'>16-. r4 <b gis' b>4--
   <a a'>8. a16~ a8 a8 a'-. a,-. r16 a8.--
-  g8. g16~ g8 g8 g'16 g,8. <d' d'>4--
-  \acciaccatura g,16 f8. f16 f'8-. f,-. r16 f8. <c' c'>4--
+  g8. g16~ g8 g8 g'16-. g,8.-. <d' d'>4--
+  \acciaccatura g,16 f8. f16 f'8-. f,-. r16 f8.-. <c' c'>4--
   e,8. c'16~ c8 e, r4 e'16 c <g g'>8--
 }
 
+% bar 17 - 29
 upper-two = \relative c'' {
   \makeOctaves 1 {
     d8.\( e16~ e8 f~ f e4 f8 g8. c16~ c8 g~ g c,4.\)
   }
   << {
-    f4.-> g8~-> g4. gis8~-> gis4. ais8~-> ais4. b8->~\(
+    f4.->\( g8~-> g4. gis8~-> gis4. ais8~-> ais4. b8->~\)\(
     b4. \stemNeutral gis16 e b8 e gis b ais4. fis16 cis ais2\)
   } \\ {
     <f aes des>8 <ees g ees'> <des f des'> <g bes ees>~
@@ -142,7 +149,7 @@ upper-two = \relative c'' {
     q4.
   } >>
   a'4.\( fis16 d a8 d fis a
-  <gis eis gis,>4 <ais fisis ais,> <b gis b,> <cis ais cis,>\)
+  <gis eis gis,>4-- <ais fisis ais,>-- <b gis b,>-- <cis ais cis,>\)--
   <b gis e>4.\( gis16 e b8 e gis b c4 \grace { c16 d e } <f f,>2 c4\)
   << {
     \stemNeutral
@@ -157,6 +164,7 @@ upper-two = \relative c'' {
   } >>
 }
 
+% bar 17 - 29
 lower-two = \relative c, {
   d8. a'16 a4--
   d,8. a'16 a4--
@@ -165,17 +173,18 @@ lower-two = \relative c, {
   <des des,>8-> f aes <ees ees,>->~ q4 q8 <e e,>8->~
   q4 q8 <fis fis,>8->~ q4 q8 <a a,>8->
 
-  a,,8. a'16~ a8 a a4 a'8 a,
-  <gis gis'>8. gis16~ gis8 gis gis8. gis16 gis,4
-  g'8. g16~ g8 g g4 g'8 g,
-  <dis cis'>4 <eis dis'> <fis e'> <gis fis'>
-  a8. e'16 e8. e,16 a8. e'16 e4
-  g,8. d'16 d8. d,16 g8. d'16 d4
+  a,,8. a'16~ a8 a-. a4-- a'8-. a,-.
+  <gis gis'>8. gis16~ gis8 gis-. gis8. gis16 gis,4
+  g'8. g16~ g8 g-. g4-- g'8 g,
+  <dis cis'>4-- <eis dis'>-- <fis e'>-- <gis fis'>--
+  a8. e'16 e8. e,16 a8. e'16 e4--
+  g,8. d'16 d8. d,16 g8. d'16 d4--
   <e, b' e>4 <d d'> <cis cis'> <c c'>
   <bes ees bes'> <ees ees'> <aes, aes'> <des aes' des>
-  <c c'>8. c16 g'4 c,8. c16 g'8 g
+  <c c'>8. c16 g'4-- c,8. c16 g'8-. g-.
 }
 
+% bar 30 - 40
 upper-three = \relative c'' {
   r8
   << {
@@ -193,7 +202,8 @@ upper-three = \relative c'' {
   f'8-. c16( f~ f8 g) bes8-. a-. <f bes>-.
   << {
     c8--~ c4
-    s2 s8
+    s2 \hideNotes c8
+    \unHideNotes
     \clef treble
     \stemNeutral
     <c c'>8\(~^\f
@@ -206,11 +216,15 @@ upper-three = \relative c'' {
   } \\ {
     s8 r8 \clef bass
     \stemNeutral
-    c,,8-. f16( a8) bes16~( bes8 a) f-. \cl c-.
+    c,,8-. f16( a8) bes16~( bes8[ a)]
+    \autoBeamOff
+    \once \override Glissando.style = #'dashed-line
+    f-.\glissando \cl c-.
+    \autoBeamOn
     s1*2
-    \cr \stemDown r8 <f' c'>8~^\p q16 q8 q16~ q q8. q8 q
+    \cr \stemDown r8 <f' c'>8~-.^\p q16 q8-. q16~-. q q8.-. q8-. q-.
   } >>
-  <f b>8 q~ q16 q8 q16
+  <f b>8-. q~-. q16 q8-. q16-.
   r4 r8
   << {
     \stemNeutral
@@ -222,24 +236,28 @@ upper-three = \relative c'' {
   } >>
 }
 
+% bar 30 - 40
 lower-three = \relative c {
   a8( a') e,( e') d,( d') a( a')
   b,( b') f,( f') e,( e') b( b')
   a,( <a' c>) c,16( <a' c>8.) bes,,8 bes' c, c'
-  bes8. f16~ f f, f'8 bes,16 f'8. f,8 f
-  bes8. f'16~ f f, f'8 bes,16 f'8. f8 f
-  aes8 aes' aes16 ees aes,8 g8. f'16 g ees g,8
-  ces8 <ges' ces ees>~ q8. ces,16 bes8 <ges' bes des> <des des'> <bes bes'>
-  <g g'>8. d'16 d g8. g16 g'8 g,16 d8 d
-  g8. d16 d d8 g16
+  bes8. f16~ f f, f'8-. bes,16 f'8. f,8-. f-.
+  bes8. f'16~ f f, f'8-. bes,16 f'8. \stemDown f8-. f-.
+  \stemNeutral
+  aes8_( aes')
+  aes16( ees aes,8) g8.( f'16 g ees g,8)
+  ces8 <ges' ces ees>~-- q8. ces,16 bes8 <ges' bes des> <des des'> <bes bes'>
+  <g g'>8. d'16-3 d-2 g8. g16 g'8 g,16 d8-. d-.
+  g8. d16-. d-. d8-. g16-.
   r4 g,,4->
   r2 r4 \repeat tremolo 2 { g16\p\< g' }
   \repeat tremolo 8 { g,16 g'\! }
 }
 
+% bar 41 - end
 upper-end = \relative c'' {
   << {
-    \grace { e32 f g a b }
+    \grace { e32-2 f g a b }
     \stemUp
     <c, e c'>4
   } \\ {
@@ -251,10 +269,11 @@ upper-end = \relative c'' {
   <a' c f>8.-> q16~-> q8 <b d g>8-> r4 <g g'>
 }
 
+% bar 41 - end
 lower-end = \relative c, {
-  c4-- r r r8 r16 c
+  c4-- r r r8 r16 c-.
   c4-- r r2
-  c4-- r r r8 r16 c
+  c4-- r r r8 r16 c-.
   a''8.-> a16~-> a8 g->
   g,,8. d'16 g4
 }
@@ -266,11 +285,13 @@ upper = \relative c' {
   \key c \major
   \partial 2
   \upper-prelude
-  \upper-one
-  \upper-two
-  \upper-three
-  \upper-end
-  \bar "|."
+  \repeat volta 2 {
+    \upper-one
+    \upper-two
+    \upper-three
+    \upper-end
+  }
+  % \bar "|."
 }
 
 lower = \relative c' {
@@ -279,11 +300,17 @@ lower = \relative c' {
   \key c \major
   \partial 2
   \lower-prelude
-  \lower-one
-  \lower-two
-  \lower-three
-  \lower-end
-  \bar "|."
+  \repeat volta 2 {
+    \lower-one
+    \lower-two
+    \lower-three
+    \lower-end
+  }
+  \once \override Score.RehearsalMark.break-visibility = #end-of-line-visible
+  \once \override Score.RehearsalMark.self-alignment-X = #RIGHT
+  \once \override Score.RehearsalMark.direction = #DOWN
+  \mark "Repeat and Fade, or end at middle of bar 12"
+  % \bar "|."
 }
 
 dynamics = {
@@ -294,7 +321,7 @@ dynamics = {
   s8. s16\mp s2. s1 s1 s2.\< s4\!
   s1*2
   s1_"cresc." s1 s1\f
-  s1\mf s1*7 s2. s4\f s1*2 s4 s2.\mf s1*3
+  s1\mf s1*7 s2. s4\f s1*2 s1\mf s1*3
 }
 
 \book {
