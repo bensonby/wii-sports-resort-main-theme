@@ -3,7 +3,6 @@
 #(set-global-staff-size 16)
 
 % TODO
-% fingering up
 % create midi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,16 +106,16 @@ upper-one = \relative c'' {
     s8 g\( c16 d8 f16~ f8 e c g'~ \stemUp g2\)
   } \\ {
     s8 s2.
-    r16 d,16\( b d r d-3 b-1 d-3 \stemNeutral a-1 a-2 r g-1 r b g a g8\)
+    r16 d,16\( b d r <d-3> <b-1> <d-3> \stemNeutral <a-1> <a-2> r <g-1> r b g a g8\)
     s8 s2.
     \stemDown
-    r16 d'\( e c e d e f-4 \stemNeutral g4-1\glissando g,4\)
+    r16 d'\( e c e d e <f-4> \stemNeutral <g-1>4\glissando g,4\)
   } >>
 }
 
 % bar 5 - 16
 lower-one = \relative c, {
-  c8. g'16-1 g4---2
+  c8. <g'-1>16 <g-2>4--
   c,8. g'16 g4--
   c,8. g'16 g4--
   c,8. g'16 gis4--
@@ -247,7 +246,7 @@ lower-three = \relative c {
   aes8_( aes')
   aes16( ees aes,8) g8.( f'16 g ees g,8)
   ces8 <ges' ces ees>~-- q8. ces,16 bes8 <ges' bes des> <des des'> <bes bes'>
-  <g g'>8. d'16-3 d-2 g8. g16 g'8 g,16 d8-. d-.
+  <g g'>8. <d'-3>16 <d-2> g8. g16 g'8 g,16 d8-. d-.
   g8. d16-. d-. d8-. g16-.
   r4 g,,4->
   r2 r4 \repeat tremolo 2 { g16\p\< g' }
@@ -279,6 +278,7 @@ lower-end = \relative c, {
 }
 
 upper = \relative c' {
+  \set fingeringOrientations = #'(up)
   \clef treble
   \tempo 4 = 124
   \time 4/4
@@ -295,6 +295,7 @@ upper = \relative c' {
 }
 
 lower = \relative c' {
+  \set fingeringOrientations = #'(down)
   \clef bass
   \time 4/4
   \key c \major
