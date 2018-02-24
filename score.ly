@@ -2,9 +2,6 @@
 \include "articulate.ly"
 #(set-global-staff-size 16)
 
-% TODO
-% create midi
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  http://lsr.di.unimi.it/LSR/Item?id=445
 
@@ -57,9 +54,16 @@ rhMark = \markup {
 
 upper-prelude = \relative c {
   \clef bass
-  g4\glissando
-  \clef treble
-  b'''4
+  \tag #'written {
+    g4\glissando
+    \clef treble
+    b'''4
+  }
+  \tag #'midi {
+    \tuplet 24/16 {
+      g,,,32 a b c d e f g a b c d e f g a b c d e f g a b
+    }
+  }
   <c c,>1~ q8 c16\(-.-3 c-.-2 b-.-1 c8-. g16-. r g8-.-2 g16-.-1 g-.-4 f-. e-. c~ c1\)
   r8 g16\(-.-2 g-.-1 a-. c8-. g16-. r g-.-2 g-.-1 a-. c-. d-. e-. c-.\)
 }
@@ -74,7 +78,15 @@ lower-prelude = \relative c' {
   } \\ {
     c,1 c c c2
   } >>
-  \acciaccatura g'16 g,4 g''8\glissando g,,
+  \acciaccatura g'16 g,4
+  \tag #'written {
+    g''8\glissando g,,
+  }
+  \tag #'midi {
+    \tuplet 15/8 {
+      g''32 f e d c b a g f e d c b a g
+    }
+  }
 }
 
 % bar 5 - 16
@@ -109,7 +121,17 @@ upper-one = \relative c'' {
     r16 d,16\( b d r <d-3> <b-1> <d-3> \stemNeutral <a-1> <a-2> r <g-1> r b g a g8\)
     s8 s2.
     \stemDown
-    r16 d'\( e c e d e <f-4> \stemNeutral <g-1>4\glissando g,4\)
+    r16 d'\( e c e d e <f-4> \stemNeutral
+    \tag #'written {
+      <g-1>4\glissando g,4\)
+    }
+    \tag #'midi {
+      g'8~
+      \tuplet 7/4 {
+        g32 f e d c b a
+      }
+      g4
+    }
   } >>
 }
 
@@ -221,9 +243,9 @@ upper-three = \relative c'' {
     f-.\glissando \cl c-.
     \autoBeamOn
     s1*2
-    \cr \stemDown r8 <f' c'>8~-.^\p q16 q8-. q16~-. q q8.-. q8-. q-.
+    \cr \stemDown r8 <f' c'>8-.^\p r16 q8-. q16-. r q8-. r16 q8-. q-.
   } >>
-  <f b>8-. q~-. q16 q8-. q16-.
+  <f b>8-. q-. r16 q8-. q16-.
   r4 r8
   << {
     \stemNeutral
@@ -333,13 +355,13 @@ dynamics = {
           \set Staff.midiInstrument = #"acoustic grand"
           \set Staff.midiMinimumVolume = #0.6
           \set Staff.midiMaximumVolume = #0.7
-          \articulate << \upper >>
+          \articulate << \keepWithTag #'midi \upper >>
         }
         \new Staff = "left" {
           \set Staff.midiInstrument = #"acoustic grand"
           \set Staff.midiMinimumVolume = #0.6
           \set Staff.midiMaximumVolume = #0.7
-          \articulate << \lower >>
+          \articulate << \keepWithTag #'midi \lower >>
         }
       >>
     >>
@@ -350,9 +372,9 @@ dynamics = {
   \score {
     \new StaffGroup <<
       \new PianoStaff <<
-        \new Staff = "right" { \upper }
+        \new Staff = "right" { \keepWithTag #'written \upper }
         \new Dynamics = "Dynamics_pf" \dynamics
-        \new Staff = "left" { \lower }
+        \new Staff = "left" { \keepWithTag #'written \lower }
       >>
     >>
     \layout {
