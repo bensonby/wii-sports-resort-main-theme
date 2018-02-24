@@ -353,14 +353,14 @@ dynamics = {
       \new PianoStaff <<
         \new Staff = "right" {
           \set Staff.midiInstrument = #"acoustic grand"
-          \set Staff.midiMinimumVolume = #0.6
-          \set Staff.midiMaximumVolume = #0.7
+          \set Staff.midiMinimumVolume = #0.7
+          \set Staff.midiMaximumVolume = #1.0
           \articulate << \keepWithTag #'midi \upper >>
         }
         \new Staff = "left" {
           \set Staff.midiInstrument = #"acoustic grand"
-          \set Staff.midiMinimumVolume = #0.6
-          \set Staff.midiMaximumVolume = #0.7
+          \set Staff.midiMinimumVolume = #0.7
+          \set Staff.midiMaximumVolume = #1.0
           \articulate << \keepWithTag #'midi \lower >>
         }
       >>
